@@ -150,8 +150,6 @@ app.MapPost("/upload", async (HttpContext context) =>
     using (var stream = new MemoryStream())
     {
         await imgFile.CopyToAsync(stream);
-
-
         var imgObj = new ImageFile
         {
             id = imgID,
@@ -166,7 +164,6 @@ app.MapPost("/upload", async (HttpContext context) =>
         };
 
         string jsonString = JsonSerializer.Serialize(imgObj, jsonOptions);
-
         File.WriteAllText(jsonPath, jsonString);
     }
 
