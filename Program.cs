@@ -178,10 +178,8 @@ app.MapGet("/image/{id}", async (HttpContext context) =>
     string jsonString = await File.ReadAllTextAsync(jsonPath);
     ImageFile? imageObj = JsonSerializer.Deserialize<ImageFile>(jsonString);
 
-    Console.WriteLine(imageObj.title);
-    Console.WriteLine(imageObj.url);
-
     string html = $@"
+    <!DOCTYPE html>
      <html>
         <head>
             <title> Image Uploader </title>
@@ -196,18 +194,41 @@ app.MapGet("/image/{id}", async (HttpContext context) =>
                     height: 100vh;
                     align-items: center;
                     display: flex;
-                    justify-content: center; }}
+                    justify-content: space-evenly; }}
+                .btn-custom{{
+                    font-weight: 700;
+                    border: solid #e91e63 3px;
+                    border-radius: 7px;
+                    width: fit-content;
+                    align-self: flex-end; 
+                    color: #e91e63; 
+                    background-color:#ffffff00;
+                    border-radius: 120x; }}  
+                .btn-custom:hover{{
+                    background-color: #e91e63 !important; 
+                    color:#ffffff !important; 
+                    border: solid 3px #e91e63 !important; }}
+                .card-custom{{
+                    width: 20rem;
+                    border-radius: 7px;
+                    background-color: aliceblue; 
+                    box-shadow:rgba(0 ,0 ,0 ,0.15) 0px 2px 8px;}}
+                .card-text{{
+                    text-align: center;
+                    font-size: x-large;
+                    font-weight: 600;
+                    color: #e91e63;}}
             </style>
         </head>
         <body class=""container"">
-            <div class=""card"" style=""width: 18rem;"">
+            <div class=""card card-custom"">
                 <img src=""data:image/jpeg;base64,{imageObj.url}"" class=""card-img-top"" alt=""{imageObj.title}"">
                 <div class=""card-body"">
                     <p class=""card-text"">{imageObj.title}</p>
                 </div>
             </div>
             <a href=""/"">
-                <button type=""button"" class=""btn btn-primary"">Back</button>
+                <button type=""button"" class=""btn btn-custom"">Back</button>
             </a>
                 
             <script src=""https://code.jquery.com/jquery-3.2.1.slim.min.js"" integrity=""sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"" 
